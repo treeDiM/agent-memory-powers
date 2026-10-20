@@ -1,0 +1,12 @@
+# --- Claude Code ----------------------------------------------------------
+# Ignoré sauf les skills du dépôt, qui sont du travail versionné : elles
+# décrivent des gestes du projet, pas la configuration d'une machine. La
+# forme « .claude/* » est obligatoire — avec « .claude/ », git ne descend
+# pas dans le répertoire et aucune négociation ne peut y rouvrir un fichier.
+# Restent ignorés : settings.local.json, launch.json, worktrees/.
+.claude/*
+!.claude/skills/
+
+# --- Obsidian -------------------------------------------------------------
+.obsidian/
+.trash/

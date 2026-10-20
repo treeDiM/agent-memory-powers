@@ -1,0 +1,50 @@
+# Conventions d'edition partagees. Les fins de ligne ne sont PAS fixees ici :
+# .gitattributes en est la seule autorite.
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{md,markdown}]
+indent_size = 2
+# deux espaces en fin de ligne = retour a la ligne : ne pas les rogner
+trim_trailing_whitespace = false
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+[*.{csproj,props,targets,resx,config,xml}]
+indent_size = 2
+
+[*.sql]
+indent_size = 4
+
+[*.cs]
+# --- organisation des using ---
+dotnet_sort_system_directives_first = true
+csharp_using_directive_placement = outside_namespace:warning
+
+# --- style retenu pour ce depot ---
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_prefer_braces = when_multiline:silent
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_new_line_before_open_brace = all
+
+# --- nommage ---
+dotnet_naming_rule.types_pascal.severity = warning
+dotnet_naming_rule.types_pascal.symbols = types_and_members
+dotnet_naming_rule.types_pascal.style = pascal_case
+dotnet_naming_symbols.types_and_members.applicable_kinds = class,struct,enum,interface,delegate,method,property,event
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.private_fields_camel.severity = suggestion
+dotnet_naming_rule.private_fields_camel.symbols = private_fields
+dotnet_naming_rule.private_fields_camel.style = camel_case
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_style.camel_case.capitalization = camel_case
