@@ -7,5 +7,3 @@ Cette liste est maintenue à jour par l'agent.
 ---
 
 # Contenu
-* 
-

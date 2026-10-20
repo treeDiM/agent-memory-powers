@@ -1,4 +1,4 @@
-# S'assurer que les ligesn suviantes sont bien présentes dans le .gitignore
+# S'assurer que les lignes suivantes sont bien présentes dans le .gitignore
 
 # --- Claude Code ----------------------------------------------------------
 # Ignoré sauf les skills du dépôt, qui sont du travail versionné : elles
@@ -9,6 +9,6 @@
 .claude/*
 !.claude/skills/
 
-# --- Obbsidian ------------------------------------------------------------
+# --- Obsidian -------------------------------------------------------------
 .obsidian/
 .trash/

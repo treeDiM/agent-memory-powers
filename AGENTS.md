@@ -15,8 +15,8 @@ Projet du programme **A COMPLETER**
 	* `10-work-items` : Analyse de demandes. Rédigé par moi. Au format `<prefixe>-<nnnn>-<slug>.md`. Dans le cadre d'un brainstorming Superpowers, on indiquera spécifiquement à l'agent quel work-item lire. L'agent ne les modifie pas **à l'exception du front matter**. Deux familles de work items cohabitent : 
 		* Les **work items locaux** créés par la skill `/create-work-item`, dont le préfixe est lu dans `docs/work-items-settings.json` et dont le numéro est alloué par la skill de création.
 		* Les **work items importés de Jira** créés par la skill `/create-work-item-from-jira`, qui portent le préfixe du projet JIRA et le numéro du ticket JIRA complété à quatre chiffres. Dans ce cas, l'agent écrit aussi le corps, **à la création et seulement à la création**.
-	* `20-specs` : SuperPowers écrira ici ses spécifications produites au format `YYMMDD-<slug>.md`. Pour un brainstorming basé sur un **work item**, Superpower nommera la spec `YYMMDD-<prefixe>-<nnnn>-<slug>.md`
-	*  `30-plans` : SuperPowers écrira ici ses plans d'exécution au format `YYMMDD-<slug>.md`. Si un plan s'appuie sur un spec contenant un numéro de work item, Superpowers nommera le plan `YYMMDD-<prefixe>-<nnnn>-<slug>.md`
+	* `20-specs` : Superpowers écrira ici ses spécifications produites au format `YYMMDD-<slug>.md`. Pour un brainstorming basé sur un **work item**, Superpowers nommera la spec `YYMMDD-<prefixe>-<nnnn>-<slug>.md`
+	*  `30-plans` : Superpowers écrira ici ses plans d'exécution au format `YYMMDD-<slug>.md`. Si un plan s'appuie sur un spec contenant un numéro de work item, Superpowers nommera le plan `YYMMDD-<prefixe>-<nnnn>-<slug>.md`
 	* `40-adr` : Architecture Decision Record. **Au fil de l'eau, dès qu'une décision est adoptée l'agent doit proposer de créer une ADR** au format : `YYMMDD-<slug>.md`. L'utilisateur doit confirmer cette création d'ADR.
 	* `50-technical-references` :  documents techniques de référence. Chaque document traite un thème particulier. Important : Ils doivent être **maintenu à jour par l'agent, au fil de l'eau, dès que la changement a lieu** de manière synthétique et non verbeuses. L'agent ne créé pas de nouveaux documents spontanément, mais peut en proposer la création si le thème traité n'est pas déjà couvert par un autre document.
 # Qui croire ?
@@ -27,10 +27,10 @@ Projet du programme **A COMPLETER**
 * L'utilisateur écrit ses documents dans `00-knowledge-base`,  `05-draft`,  et maintient son `TODO.md`
 * L'utilisateur créé un nouveau work item par la skill `/create-work-item <titre>` et l'agent met à jour `docs/10-work-items/README.md`
 * L'utilisateur importe un ticket Jira par la skill `/create-work-item-from-jira <cle>` : l'agent crée le work item, met à jour `docs/10-work-items/README.md`, et pose le label `Claude` sur le ticket Jira d'origine
-* L'utilisateur soumet un `10-work-items` au brainstorming de SuperPowers
-* SuperPower itèrent la reflexion avec l'utilisateur et fini par produire des `20-specs`. L'agent met à jour `docs/20-specs/README.md`
-* Quand l'utilisateur valide la `20-specs`, SuperPowers produit une plan d'exécution dans `30-plans` et l'agent met à jour `docs/30-plans/README.md`
-* Quand l'utilisateur valide le `30-plans`, SuperPowers **lance le développement avec les consignes suivantes**  :
+* L'utilisateur soumet un `10-work-items` au brainstorming de Superpowers
+* Superpowers itère la réflexion avec l'utilisateur et finit par produire des `20-specs`. L'agent met à jour `docs/20-specs/README.md`
+* Quand l'utilisateur valide la `20-specs`, Superpowers produit un plan d'exécution dans `30-plans` et l'agent met à jour `docs/30-plans/README.md`
+* Quand l'utilisateur valide le `30-plans`, Superpowers **lance le développement avec les consignes suivantes**  :
 	* **Sequential only**: One task at a time. No parallel runs. 
 	* **Clean context**: Give sub-agent only needed context with specs.
 	* **Adaptive effort**: Match model power and reasoning depth to task difficulty.
@@ -68,10 +68,10 @@ Les `status` possibles sont :
 * `new` : Statut après la création du work item par la skill `/create-work-item` ou `/create-work-item-from-jira`
 * `deferred` : Status positionné manuellement par l'utilisateur.
 * `in-progress` : Positionné par l'agent, lors de l'écriture de la spécification dans `20-specs` 
-* `review` : Positionné par l'agent, lorsque SuperPowers arrive à l'étape de revue de code.
+* `review` : Positionné par l'agent, lorsque Superpowers arrive à l'étape de revue de code.
 * `done` : Positionné par l'agent au commit final du développement.
 * `canceled`.  Positonné manuellement par l'utilisateur.
-Le `superpowers-class`:  doit être attribué par SuperPowers lors de sa classification et peut contenir les valeurs :
+Le `superpowers-class`:  doit être attribué par Superpowers lors de sa classification et peut contenir les valeurs :
 * `spike` : une question dont la sortie est une réponse, pas du code.
 * `bounded` : un changement bien cerné dans du code qui existe déjà dans le dépot.
 * `architectural`: nouveau projet, nouveau sous-système ou changement architectural.
