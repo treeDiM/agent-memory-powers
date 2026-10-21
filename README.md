@@ -23,7 +23,7 @@ Ce modèle prend le contre-pied des moteurs de mémoire et des bases vectorielle
 ## Principes
 
 1. **Une place pour chaque chose.** Des dossiers numérotés, chacun dédié à un type de connaissance avec son propre cycle de vie. La numérotation suit le flux de travail : les dossiers se trient dans l'ordre où le travail les traverse.
-2. **Des propriétaires clairs.** Chaque fichier et chaque dossier dit qui l'écrit : vous, l'agent, ou Superpowers. L'agent ne réécrit jamais le corps de vos work items, ne touche jamais à votre `TODO.md`, et ne lit même pas vos brouillons.
+2. **Des propriétaires clairs.** Chaque fichier et chaque dossier dit qui l'écrit : vous, l'agent, ou Superpowers. L'agent ne réécrit jamais le corps de vos work items (il y consigne seulement les arbitrages de l'étude), ne touche jamais à votre `TODO.md`, et ne lit même pas vos brouillons.
 3. **Un flux qui écrit au fil de l'eau.** Work item → brainstorming → spécification → plan → code. Les décisions deviennent des ADR, les références techniques suivent le code, et le changelog trace chaque changement en face de son work item.
 4. **Le code a le dernier mot.** Les documents sont une mémoire, pas la vérité. `AGENTS.md` dit explicitement à l'agent que le code source est la seule source de référence fiable.
 
@@ -44,7 +44,7 @@ flowchart TD
 ```
 
 1. **Vous rédigez une demande.** `/create-work-item <titre>` crée un work item numéroté avec son front matter ; vous en écrivez le corps. Ou importez un ticket Jira existant avec `/create-work-item-from-jira <clé>`.
-2. **Superpowers en fait le brainstorming avec vous** et le classe dans le champ `superpowers-class` du front matter :
+2. **Superpowers en fait le brainstorming avec vous**, consigne vos arbitrages en fin de work item, et le classe dans le champ `superpowers-class` du front matter :
 
    | Classe | Nature du travail | Suite |
    |---|---|---|
@@ -101,7 +101,7 @@ Chaque type de document a un propriétaire et une durée de vie. C'est ce qui pe
 | `00-knowledge-base/` | Invariants et vocabulaire métier (`010-glossary.md`) | Vous | Durable |
 | `05-draft/` | Brouillons et pré-analyses | Vous | Privé — l'agent ne le lit pas |
 | `07-studies/` | Analyses du dépôt ou d'un sujet général | L'agent, à votre demande | Instantané — vrai à sa date de rédaction, jamais mis à jour |
-| `10-work-items/` | La demande brute d'évolution ou de correction | Vous (corps) · l'agent (front matter seulement) | Historique — conservé pour mémoire |
+| `10-work-items/` | La demande brute d'évolution ou de correction, puis les arbitrages de l'étude | Vous (corps) · l'agent (front matter, arbitrages) | Historique — conservé pour mémoire |
 | `20-specs/` | Ce qui doit être vrai une fois le travail fait | Superpowers | Par work item |
 | `30-plans/` | Comment faire le travail, tâche par tâche | Superpowers | Par work item |
 | `40-adr/` | Une décision, son contexte, ses conséquences et les alternatives écartées | Proposée par l'agent, confirmée par vous | Immuable — remplacée par une nouvelle ADR, jamais réécrite |
@@ -149,7 +149,7 @@ Deux familles de work items cohabitent :
 - **Les work items locaux**, créés par `/create-work-item`, prennent le préfixe lu dans `docs/work-items-settings.json` et le numéro libre suivant, sur quatre chiffres — par exemple `PRJ-0001-corriger-le-delai-de-connexion-sur-reseau-lent.md`.
 - **Les work items importés de Jira**, créés par `/create-work-item-from-jira`, gardent la clé du projet Jira et complètent le numéro à quatre chiffres — `PROJ-558` devient `PROJ-0558-<slug>.md`. Ils portent deux marques de plus : le tag `Jira` et un champ `jira: PROJ-558` qui garde la clé exacte du ticket.
 
-L'agent ne modifie jamais que le front matter d'un work item. Seule exception : l'import Jira, qui écrit le corps à la création — et seulement à la création.
+L'agent ne modifie que le front matter d'un work item, à deux exceptions près : l'import Jira, qui écrit le corps à la création — et seulement à la création ; et le chapitre final `# Arbitrages rendus pendant l'étude`, que l'agent crée ou complète pour consigner les choix faits pendant le brainstorming.
 
 ## Les skills
 
@@ -222,7 +222,7 @@ Agent Memory Powers s'installe **dans un projet existant** : on y ajoute ses fic
 ## Une journée avec Agent Memory Powers
 
 1. `/create-work-item Corriger le délai de connexion sur réseau lent` crée `docs/10-work-items/PRJ-0001-corriger-le-delai-de-connexion-sur-reseau-lent.md`. Vous décrivez le problème dans son corps.
-2. Vous demandez à Claude de faire le brainstorming du work item `PRJ-0001` avec Superpowers. Il lit le work item, pose ses questions, et le classe — disons `architectural`.
+2. Vous demandez à Claude de faire le brainstorming du work item `PRJ-0001` avec Superpowers. Il lit le work item, pose ses questions, consigne vos arbitrages en fin de work item, et le classe — disons `architectural`.
 3. Superpowers écrit `docs/20-specs/YYMMDD-PRJ-0001-delai-de-connexion.md`, et l'agent passe le work item à `in-progress`. Vous relisez et validez la spécification.
 4. Superpowers écrit le plan d'exécution dans `docs/30-plans/`. Vous le validez, et le développement démarre, une tâche à la fois, chacune revue avant la suivante.
 5. En chemin, l'agent propose une ADR quand vous arrêtez une stratégie de nouvelle tentative, met à jour la référence technique sur le réseau, et trace le changement dans `CHANGELOG.md` en face de `PRJ-0001`.

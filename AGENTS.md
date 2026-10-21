@@ -12,7 +12,7 @@ Projet du programme **A COMPLETER**
 	  dont `010-glossary.md` qui est un glossaire métier.
 	* `05-draft` : les brouillons en cours de rédaction. Rédigés par moi. L'agent ne les lit pas et ne les modifie pas.
 	* `07-studies` : études ponctuelles sur le fonctionnement du dépôt ou sur des sujets généraux. Rédigées par l'agent **à ma demande**. Une étude reflète l'état du dépôt à sa date de rédaction : elle n'est **pas maintenue au fil de l'eau**.
-	* `10-work-items` : Analyse de demandes. Rédigés par moi. Au format `<prefixe>-<nnnn>-<slug>.md`. Dans le cadre d'un brainstorming Superpowers, on indiquera spécifiquement à l'agent quel work-item lire. L'agent ne les modifie pas **à l'exception du front matter**. Deux familles de work items cohabitent : 
+	* `10-work-items` : Analyse de demandes. Rédigés par moi. Au format `<prefixe>-<nnnn>-<slug>.md`. Dans le cadre d'un brainstorming Superpowers, on indiquera spécifiquement à l'agent quel work item lire. L'agent n'en modifie que le **front matter** et, **si des arbitrages sont rendus** pendant le brainstorming, le chapitre final `# Arbitrages rendus pendant l'étude`, qu'il crée ou complète : un choix par ligne, avec renvoi à la spec ou à l'ADR s'il y en a une. Deux familles de work items cohabitent :
 		* Les **work items locaux** créés par la skill `/create-work-item`, dont le préfixe est lu dans `docs/work-items-settings.json` et dont le numéro est alloué par la skill de création.
 		* Les **work items importés de Jira** créés par la skill `/create-work-item-from-jira`, qui portent le préfixe du projet JIRA et le numéro du ticket JIRA complété à quatre chiffres. Dans ce cas, l'agent écrit aussi le corps, **à la création et seulement à la création**.
 	* `20-specs` : Superpowers écrira ici ses spécifications produites au format `YYMMDD-<slug>.md`. Pour un brainstorming basé sur un **work item**, Superpowers nommera la spec `YYMMDD-<prefixe>-<nnnn>-<slug>.md`
@@ -76,4 +76,3 @@ Le `superpowers-class` doit être attribué par Superpowers lors de sa classific
 * `bounded` : un changement bien cerné dans du code qui existe déjà dans le dépôt.
 * `architectural` : nouveau projet, nouveau sous-système ou changement architectural.
 Les `tags` sont mis à jour manuellement par l'utilisateur, mais l'agent peut en proposer.
-L'agent ne modifie **que** le front matter d'un work item, jamais son corps — à une exception : la skill d'import écrit le corps d'un ticket Jira à sa création, et seulement à sa création. Passé ce moment, un ticket importé appartient à son auteur comme les autres.
