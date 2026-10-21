@@ -1,1 +1,1 @@
-le dossier `05-draft` contient des brouillons ou des pré-anayses rédigées par moi. l'agent de les lits pas. 
+Le dossier `05-draft` contient des brouillons ou des pré-analyses rédigées par moi. L'agent ne les lit pas.

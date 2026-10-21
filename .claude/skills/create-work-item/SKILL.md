@@ -88,7 +88,10 @@ tags: []
 ```
 
 `title` est **toujours** entre guillemets droits : un titre contenant « : » casse l'analyse
-YAML s'il ne l'est pas. Le titre est repris tel que saisi, sans reformulation.
+YAML s'il ne l'est pas. Le titre est repris tel que saisi, sans reformulation, mais un
+guillemet droit ou une barre oblique inverse qu'il contient doit être échappé avant écriture —
+`\` d'abord, puis `"` — sinon le front matter produit est invalide ; inverser l'ordre
+double-échapperait la barre oblique.
 
 `status: new` toujours. Les valeurs possibles sont `draft`, `new`, `deferred`,
 `in-progress`, `review`, `done`, `canceled` — mais la création en pose une seule.
@@ -97,7 +100,13 @@ YAML s'il ne l'est pas. Le titre est repris tel que saisi, sans reformulation.
 
 ## 6. Mettre à jour l'index
 
-Dans `docs/10-work-items/README.md`, ajouter une entrée relative au nouveau fichier créé
+Dans `docs/10-work-items/README.md`, ajouter une entrée à la suite des entrées voisines : le
+nom du fichier entre accents graves, un tiret cadratin, puis le titre saisi, tel quel. Par
+exemple :
+
+```
+- `PRJ-0042-revoir-le-format-d-export.md` — Revoir le format d'export.
+```
 
 ## 7. Annoncer
 
