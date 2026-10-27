@@ -134,6 +134,15 @@ cas('tags et statut a la creation', () => {
   assert.match(contenu, /^status: new$/m);
   assert.match(contenu, /^tags: \[Jira\]$/m);
   assert.match(contenu, /^superpowers-class: $/m);
+  assert.match(contenu, /^version: $/m);
+});
+
+cas('version se place entre superpowers-class et tags', () => {
+  const b = bac();
+  const contenu = fs.readFileSync(lancer(base, b), 'utf8');
+  const ordre = ['superpowers-class:', 'version:', 'tags:'].map((c) => contenu.indexOf('\n' + c));
+  assert.ok(ordre.every((i) => i !== -1), 'les trois champs doivent etre presents');
+  assert.deepStrictEqual([...ordre].sort((a, b) => a - b), ordre, 'ordre du front matter');
 });
 
 cas('doublon refuse meme sous un autre slug', () => {

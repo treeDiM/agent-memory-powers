@@ -83,6 +83,7 @@ id: <PREFIXE>-<nnnn>
 title: "Le titre saisi, tel quel"
 status: new
 superpowers-class: 
+version: 
 tags: []
 ---
 ```
@@ -97,6 +98,10 @@ double-échapperait la barre oblique.
 `in-progress`, `review`, `done`, `canceled` — mais la création en pose une seule.
 
 `superpowers-class` : valeurs possibles : `spike`, `bounded`, `architectural`. Non renseigné à la création.
+
+`version` : la version du programme que le work item produira. **Non renseignée à la création** —
+elle se décide au brainstorming, l'utilisateur tranchant entre mineure et patch, et reste vide
+pour un work item qui ne change pas l'exe. Voir le chapitre « Versionnement » de l'`AGENTS.md`.
 
 ## 6. Mettre à jour l'index
 

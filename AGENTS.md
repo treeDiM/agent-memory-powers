@@ -46,6 +46,7 @@ id: <prefixe>-<nnnn>
 title: "Le titre du work item"
 status: new
 superpowers-class: 
+version: 
 tags: []
 ---
 ```
@@ -59,6 +60,7 @@ id: PROJ-0558
 title: "Le titre du ticket Jira, tel quel"
 status: new
 superpowers-class: 
+version: 
 tags: [Jira]
 jira: PROJ-558
 ---
@@ -75,4 +77,18 @@ Le `superpowers-class` doit être attribué par Superpowers lors de sa classific
 * `spike` : une question dont la sortie est une réponse, pas du code.
 * `bounded` : un changement bien cerné dans du code qui existe déjà dans le dépôt.
 * `architectural` : nouveau projet, nouveau sous-système ou changement architectural.
+La `version` : la version du programme que le work item produira (`1.1.0`, `1.0.1`…). Vide à la création, renseignée par l'agent quand l'utilisateur a tranché (voir « Versionnement »). Elle reste vide pour un work item qui ne change pas l'exe.
 Les `tags` sont mis à jour manuellement par l'utilisateur, mais l'agent peut en proposer.
+
+# Versionnement
+La version du programme (`majeure.mineure.patch`) n'est écrite qu'à un seul endroit : `<Version>` dans `Directory.Build.props`, d'où les projets l'héritent.
+* **mineure** (`1.0.0` → `1.1.0`) : une fonctionnalité nouvelle ou un comportement modifié — bouton, fenêtre, colonne, règle métier.
+* **patch** (`1.0.0` → `1.0.1`) : une correction, un ajustement d'affichage, une performance, sans comportement nouveau.
+* **majeure** : uniquement sur décision explicite de l'utilisateur. L'agent ne la propose pas.
+
+Quand :
+* **Au brainstorming** d'un work item, l'agent qualifie l'évolution (mineure ou patch) en même temps que la `superpowers-class`. L'utilisateur tranche. L'agent écrit la version obtenue dans le champ `version` du front matter.
+* **Au commit final** du work item (passage en `done`), l'agent incrémente `<Version>` à la valeur du front matter, et la section datée du `CHANGELOG.md` porte cette version en titre : `## <AAAA-MM-JJ> — v<version>`. Les entrées de la section citent déjà leur work item en tête, le titre de section n'a donc pas à la répéter. Si `<Version>` a bougé depuis le brainstorming (un autre work item livré entre-temps), l'agent applique le niveau décidé, mineure ou patch, à la version courante, corrige le front matter et le signale.
+* **Hors work item**, quand un commit change l'exe (code, script SQL embarqué, libellé de ressource), l'agent propose un patch, ou une mineure, et l'utilisateur tranche avant le commit.
+* Ne font **jamais** bouger la version : `docs/`, `TODO.md`, les tests seuls.
+

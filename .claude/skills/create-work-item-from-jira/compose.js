@@ -105,6 +105,7 @@ function main() {
     'title: "' + echapperYaml(composerTitre(entree.summary, entree.parent)) + '"\n' +
     'status: new\n' +
     'superpowers-class: \n' +
+    'version: \n' +
     'tags: [Jira]\n' +
     'jira: ' + cle + '\n' +
     '---\n\n' +
